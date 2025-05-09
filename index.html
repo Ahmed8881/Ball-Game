@@ -4,148 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catch the Ball Game</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-        }
-        
-        #game-container {
-            position: relative;
-            width: 400px;
-            height: 500px;
-            background-color: #b3e0ff;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            border: 3px solid #0078d7;
-        }
-        
-        .ball {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #ff4500;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        }
-        
-        .special-ball {
-            background-color: #ffd700;
-            box-shadow: 0 0 10px #ffd700;
-        }
-        
-        .bad-ball {
-            background-color: #cc0000;
-            box-shadow: 0 0 10px #cc0000;
-        }
-        
-        #basket {
-            position: absolute;
-            bottom: 10px;
-            width: 80px;
-            height: 40px;
-            background-color: #8b4513;
-            border-radius: 0 0 40px 40px;
-            border: 3px solid #663300;
-            border-top: none;
-            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-        }
-        
-        #basket::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 10px;
-            width: 60px;
-            height: 10px;
-            background-color: #a65e2e;
-            border-radius: 5px;
-        }
-        
-        #score-container {
-            display: flex;
-            justify-content: space-between;
-            width: 400px;
-            padding: 10px 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #0078d7;
-        }
-        
-        #controls {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #0078d7;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        button:hover {
-            background-color: #005fa3;
-            transform: scale(1.05);
-        }
-        
-        #game-over {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 24px;
-            z-index: 10;
-        }
-        
-        #game-over button {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-        
-        #level-indicator {
-            font-size: 16px;
-            color: #0078d7;
-            margin-bottom: 10px;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        
-        @media (max-width: 500px) {
-            #game-container, #score-container {
-                width: 300px;
-            }
-            
-            #game-container {
-                height: 400px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+       
+   
 </head>
 <body>
     <h1>Catch the Ball Game</h1>
@@ -166,7 +28,7 @@
         <button id="start-button">Start Game</button>
         <button id="pause-button" disabled>Pause</button>
     </div>
-
+<sc
     <script>
         // Game variables
         let score = 0;
