@@ -2,7 +2,7 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     background-size: 600% 600%;
     animation: gradientBG 20s ease infinite;
     display: flex;
@@ -20,27 +20,39 @@ body {
 }
 
 h1 {
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.6); }
+    to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.4); }
 }
 
 #game-container {
     position: relative;
     width: 400px;
     height: 500px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.07);
     overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
-                inset 0 0 15px rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 
+                inset 0 0 15px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #game-container:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 .ball {
@@ -49,23 +61,36 @@ h1 {
     height: 30px;
     border-radius: 50%;
     background: radial-gradient(circle at 10px 10px, #ff6b6b, #ee5253);
-    box-shadow: 0 0 15px rgba(238, 82, 83, 0.7);
+    box-shadow: 0 0 20px rgba(238, 82, 83, 0.8);
+    transform: translateZ(0);
+    animation: ballFloat 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes ballFloat {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
 }
 
 .special-ball {
     background: radial-gradient(circle at 10px 10px, #feca57, #ff9f43);
-    box-shadow: 0 0 20px rgba(255, 159, 67, 0.9);
-    animation: pulse 1s infinite alternate;
+    box-shadow: 0 0 25px rgba(255, 159, 67, 0.9);
+    animation: pulse 1.2s infinite alternate;
 }
 
 .bad-ball {
     background: radial-gradient(circle at 10px 10px, #ff4757, #b71540);
-    box-shadow: 0 0 20px rgba(183, 21, 64, 0.7);
+    box-shadow: 0 0 25px rgba(183, 21, 64, 0.9);
+    animation: badPulse 1s infinite alternate;
 }
 
 @keyframes pulse {
-    from { box-shadow: 0 0 20px rgba(255, 159, 67, 0.9); }
-    to { box-shadow: 0 0 30px rgba(255, 159, 67, 1); }
+    from { box-shadow: 0 0 20px rgba(255, 159, 67, 0.9); transform: scale(1); }
+    to { box-shadow: 0 0 35px rgba(255, 159, 67, 1); transform: scale(1.08); }
+}
+
+@keyframes badPulse {
+    from { box-shadow: 0 0 20px rgba(183, 21, 64, 0.7); }
+    to { box-shadow: 0 0 30px rgba(183, 21, 64, 1); }
 }
 
 #basket {
@@ -73,11 +98,12 @@ h1 {
     bottom: 10px;
     width: 80px;
     height: 40px;
-    background: linear-gradient(to bottom, #d19b62, #9b6b43);
+    background: linear-gradient(to bottom, #f0c78a, #b17d3d);
     border-radius: 0 0 40px 40px;
-    border: 3px solid #7d5a3c;
+    border: 3px solid #8c6024;
     border-top: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5),
+                inset 0 5px 10px rgba(255, 255, 255, 0.2);
     transition: transform 0.1s ease;
 }
 
@@ -88,49 +114,84 @@ h1 {
     left: 10px;
     width: 60px;
     height: 10px;
-    background: linear-gradient(to right, #d19b62, #e0b77e, #d19b62);
+    background: linear-gradient(to right, #e0b77e, #f5d5a8, #e0b77e);
     border-radius: 5px;
+}
+
+#basket::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+    border-radius: 50%;
 }
 
 #score-container {
     display: flex;
     justify-content: space-between;
     width: 400px;
-    padding: 10px 0;
+    padding: 15px 0;
     font-size: 18px;
     font-weight: bold;
     color: #fff;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #controls {
-    margin-top: 20px;
+    margin-top: 25px;
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 button {
-    padding: 12px 24px;
+    padding: 14px 28px;
     font-size: 16px;
     font-weight: 600;
-    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    background: linear-gradient(135deg, #4776E6, #8E54E9);
     color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+    transition: all 0.4s;
+    box-shadow: 0 8px 20px rgba(71, 118, 230, 0.5);
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.5s;
 }
 
 button:hover {
-    background: linear-gradient(135deg, #0050b3, #00a6d6);
-    transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(0, 114, 255, 0.5);
+    background: linear-gradient(135deg, #3d68d8, #7b41db);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(71, 118, 230, 0.6);
+}
+
+button:hover:before {
+    left: 100%;
 }
 
 button:active {
-    transform: translateY(1px);
-    box-shadow: 0 3px 10px rgba(0, 114, 255, 0.4);
+    transform: translateY(2px);
+    box-shadow: 0 5px 15px rgba(71, 118, 230, 0.4);
 }
 
 button:disabled {
@@ -154,42 +215,70 @@ button:disabled {
     color: white;
     font-size: 24px;
     z-index: 10;
-    border-radius: 15px;
-    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 #game-over h2 {
-    margin-bottom: 10px;
-    font-size: 2.5rem;
-    text-shadow: 0 0 10px rgba(255, 0, 89, 0.7);
+    margin-bottom: 15px;
+    font-size: 3rem;
+    text-shadow: 0 0 15px rgba(255, 0, 89, 0.8);
+    background: linear-gradient(to right, #f5f7fa, #ff5e62);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulseText 2s infinite alternate;
+}
+
+@keyframes pulseText {
+    from { text-shadow: 0 0 10px rgba(255, 94, 98, 0.7); }
+    to { text-shadow: 0 0 20px rgba(255, 94, 98, 1); }
 }
 
 #game-over p {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    font-size: 1.7rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
+    letter-spacing: 1px;
 }
 
 #game-over button {
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 18px;
     background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    box-shadow: 0 5px 15px rgba(255, 75, 43, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 75, 43, 0.5);
+    animation: buttonPulse 2s infinite alternate;
+}
+
+@keyframes buttonPulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
 }
 
 #game-over button:hover {
     background: linear-gradient(135deg, #e63b63, #e64426);
-    box-shadow: 0 7px 20px rgba(255, 75, 43, 0.5);
+    box-shadow: 0 10px 25px rgba(255, 75, 43, 0.7);
+    animation: none;
+    transform: translateY(-5px);
 }
 
 #level-indicator {
     font-size: 18px;
     color: #fff;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin-bottom: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 5px 15px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 8px 20px;
     border-radius: 20px;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .particle {
@@ -199,18 +288,34 @@ button:disabled {
     border-radius: 50%;
     pointer-events: none;
     filter: blur(1px);
+    z-index: 5;
+    animation: fadeOut 0.8s linear forwards;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; transform: scale(0.1); }
 }
 
 @media (max-width: 500px) {
     #game-container, #score-container {
-        width: 300px;
+        width: 320px;
     }
     
     #game-container {
-        height: 400px;
+        height: 420px;
     }
     
     h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+    
+    #controls {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+    
+    button {
+        width: 200px;
     }
 }
